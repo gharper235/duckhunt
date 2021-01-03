@@ -4,7 +4,7 @@ html {
 }
 
 /* Hides the main html elements and displays small browser picture */
-@media (max-width: 600px) {
+@media screen and (max-width: 800px) {
   button {
     display: none;
   }
@@ -14,8 +14,35 @@ html {
   #gameTitle {
     display: none;
   }
+  .introDuck {
+    display: none !important;
+  }
+  .x {
+    display: none !important;
+  }
   html {
-    background: url("/images/smallbrowser.gif") no-repeat center fixed;
+    background: url("/images/smallbrowser-w.gif") no-repeat center fixed;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  button {
+    display: none;
+  }
+  #stats {
+    display: none;
+  }
+  #gameTitle {
+    display: none;
+  }
+  .introDuck {
+    display: none !important;
+  }
+  .x {
+    display: none !important;
+  }
+  html {
+    background: url("/images/smallbrowser-h.gif") no-repeat center fixed;
   }
 }
 
@@ -39,7 +66,41 @@ html {
   justify-content: center;
   align-items: center;
 }
-#introDuck {
+.introDuck {
   display: flex;
   justify-content: center;
 }
+
+/* flying duck around screen */
+.x {
+  -webkit-animation: x 13s linear infinite alternate;
+  animation: x 13s linear infinite alternate;
+}
+
+.y {
+  -webkit-animation: y 13s linear infinite alternate;
+  animation: y 13s linear infinite alternate;
+}
+
+@-webkit-keyframes x {
+  100% {
+    transform: translateX(calc(100vw - 100px));
+  }
+}
+
+@keyframes x {
+  100% {
+    transform: translateX(calc(100vw - 100px));
+  }
+}
+@-webkit-keyframes y {
+  100% {
+    transform: translateY(calc(100vh - 100px));
+  }
+}
+@keyframes y {
+  100% {
+    transform: translateY(calc(100vh - 100px));
+  }
+}
+/* end of flying duck */
