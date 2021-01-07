@@ -13,16 +13,7 @@
     <!-- JQuery -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
-    <!-- Bootstrap CSS with Popper -->
-    
-    <!-- // TODO this screwed up my background image-->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->  
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script> -->
-
-
+  
     <!-- Font for game title -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
@@ -30,17 +21,27 @@
     <title>Duck Hunt RETRO</title>
 </head>
 
-<body>
+<body id="playArea">
+
     <!-- Bouncing duck -->
-    <div class="x" id="bouncingDuck">
-        <img class="y" src="images/flying-duck.gif" alt="flying duck" />
-    </div>
+    <span id="crosshairCursor" style="cursor:crosshair">crosshair
+        <div class="x" class="shootThisDuck" id="bouncingDuck">
+            <img class="y" src="images/flying-duck.gif" alt="flying duck" />
+        </div>
+    </span>
 
     <!-- duck intro song with quack -->
-    <!-- <audio src="audio/game-intro-music-with-quack.mp3" autoplay="autoplay" loop="loop"></audio> -->
+    <!-- <audio controls loop id="audioControl">
+        <source src="audio/game-intro-music-with-quack.mp3" type="audio/mpeg" autoplay="autoplay" loop="loop">
+            Your browser does not support the audio element.
+        </source>
+    </audio> -->
+    <div id="displayPlayerTurn">
+        <p></p>
+    </div>
 
     <div id="gameTitle">
-        <h1 class="title">Duck Hunt<br>RETRO</h1>
+        <h1 class="title">Duck Hunt<br>RETRO</h1>      
     </div>
 
     <div id="stats">
@@ -52,8 +53,11 @@
     </div>
 
     <div class="buttons">
-        <button id="startGame" type="button" onclick="newGame() ">Click to start a new game!</button><br>
-        <button id="help" type="button" onclick="help()">Click to view instructions.</button>
+
+        <button id="startGame" type="button" onclick="newGame() ">Click to start a new game!</button>
+
+        <button id="instructions" type="button" onclick="help()">Click to view instructions.</button>
+
     </div>
 
     <div class="introDuck" id="introDuck">

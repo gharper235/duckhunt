@@ -6,12 +6,18 @@ html {
 /* Hides the main html elements and displays small browser picture */
 @media screen and (max-width: 800px) {
   button {
-    display: none;
+    display: none !important;
   }
   #stats {
     display: none;
   }
   #gameTitle {
+    display: none;
+  }
+  #crosshairCursor {
+    display: none;
+  }
+  #audioControl {
     display: none;
   }
   .introDuck {
@@ -27,12 +33,18 @@ html {
 /* Hides the main html elements and displays small browser picture */
 @media screen and (max-height: 600px) {
   button {
-    display: none;
+    display: none !important;
   }
   #stats {
     display: none;
   }
   #gameTitle {
+    display: none;
+  }
+  #crosshairCursor {
+    display: none;
+  }
+  #audioControl {
     display: none;
   }
   .introDuck {
@@ -46,6 +58,12 @@ html {
   }
 }
 
+#displayPlayerTurn {
+  font-size: 40px;
+  text-align: center;
+  color: white;
+}
+
 .title {
   font-size: 84px;
   text-align: center;
@@ -57,18 +75,53 @@ html {
   position: fixed;
   top: 0;
   color: white;
+  display: none;
 }
 
 .buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+}
+
+#startGame {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 2px solid #000000;
+  width: 25%;
+}
+
+#instructions {
+  background-color: #a836df;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 2px solid #000000;
+  width: 25%;
 }
 
 .introDuck {
   display: flex;
   justify-content: center;
+}
+
+#audioControl {
+  float: right;
+  margin-top: 0;
 }
 
 /* flying duck around screen */
@@ -107,5 +160,6 @@ html {
 /* end of flying duck */
 
 #bouncingDuck {
-  visibility: hidden;
+  display: none;
+  position: absolute;
 }
