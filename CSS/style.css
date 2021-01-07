@@ -17,15 +17,15 @@ html {
   .introDuck {
     display: none !important;
   }
-  .x {
+  .y {
     display: none !important;
   }
   html {
     background: url("/images/smallbrowser-w.gif") no-repeat center fixed;
   }
 }
-
-@media screen and (max-height: 800px) {
+/* Hides the main html elements and displays small browser picture */
+@media screen and (max-height: 600px) {
   button {
     display: none;
   }
@@ -54,7 +54,6 @@ html {
 }
 
 #stats {
-  border-style: solid;
   position: fixed;
   top: 0;
   color: white;
@@ -66,6 +65,7 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 .introDuck {
   display: flex;
   justify-content: center;
@@ -76,31 +76,36 @@ html {
   -webkit-animation: x 13s linear infinite alternate;
   animation: x 13s linear infinite alternate;
 }
-
 .y {
   -webkit-animation: y 13s linear infinite alternate;
   animation: y 13s linear infinite alternate;
 }
-
 @-webkit-keyframes x {
   100% {
     transform: translateX(calc(100vw - 100px));
+    box-sizing: border-box;
   }
 }
-
 @keyframes x {
   100% {
     transform: translateX(calc(100vw - 100px));
+    box-sizing: border-box;
   }
 }
 @-webkit-keyframes y {
   100% {
     transform: translateY(calc(100vh - 100px));
+    box-sizing: border-box;
   }
 }
 @keyframes y {
   100% {
     transform: translateY(calc(100vh - 100px));
+    box-sizing: border-box;
   }
 }
 /* end of flying duck */
+
+#bouncingDuck {
+  visibility: hidden;
+}
