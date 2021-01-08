@@ -1,6 +1,12 @@
 html {
   background: url("/images/game-bg.jpg") no-repeat center fixed;
   background-size: cover;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
 }
 
 /* Hides the main html elements and displays small browser picture */

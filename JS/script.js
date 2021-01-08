@@ -3,37 +3,74 @@ var player1score = 0;
 var player2score = 0;
 var round = 0;
 var playerMoves = 0;
+var player1turn = 0; // if this is 0 then player is not active, if 1 then the player is active
+var player2turn = 0; // if this is 0 then player is not active, if 1 then the player is active
 let gameState = false;
-let currentTurn = null;
-let winner;
 let bouncingDuck = document.getElementById("bouncingDuck");
 
 document.getElementById("bouncingDuck").addEventListener("click", function(e) {
     // checks to verify the event was clicked
-    console.log("Duck was hit"); 
+    // console.log("Duck was hit"); 
 
     // plays success audio when duck is hit
     var audio = new Audio("audio/success.mp3"); 
     audio.play();
-
-    // TODO need to change to add score to the current player instead of both
-    player1score = player1score + 1;
-    console.log("Player 1 Score: " + player1score);
     renderScoreBoard();
+    addScore();
 });
 
 function renderScoreBoard() {
     $('#p1score').html(`Player 1 Hits: ${player1score}`);
-    $('#p2score').html(`Player 2 Hits: ${player1score}`);
+    $('#p2score').html(`Player 2 Hits: ${player2score}`);
     $('#round').html(`Round: ${round} of 3`);
 }
 
 function player1Turn(){
+    player2turn = 0;
+    player1turn = 1;
+    console.log("Player 1 Turn variable is: " + player1turn);
+    console.log("Player 2 Turn variable is: " + player2turn);
     $("p").text("Player 1's Turn");
+    playerMoves = 0;
 }
 
 function player2Turn(){
+    player1turn = 0;
+    player2turn = 1;
     $("p").text("Player 2's Turn");
+    player2shots = 0;
+    playerMoves = 0;
+}
+
+// TODO does not work
+// function checkPlayerTurn() {
+//     if(player1turn = 1 && playerMoves = 3) {
+//         player2Turn();
+//     } 
+//     // if(player2Turn = 1 && playerMoves = 3) {
+//     //     player1Turn();
+//     // }
+// }
+
+function addScore() {
+    if (player1turn = 1) {
+        player1score = player1score + 1;
+    } 
+    else if (player2turn = 1) {
+        player2score = player2score + 1;
+    }
+    console.log("Player 1 score: " + player1score);
+    console.log("Player 2 score: " + player2score);
+}
+
+function addRound() {
+    if(playerMoves <= 3) {
+        playerMoves = playerMoves + 1;
+    } else {
+        round = round + 1;
+        playerMoves = 0;
+    }
+    renderScoreBoard();
 }
 
 function help() {
@@ -43,10 +80,8 @@ function help() {
 function newGame() {
     renderScoreBoard();
     removeElement();
-
     // state which players turn it is plus reset scoreboard values
     player1Turn();
-    currentTurn = 1;
     winner = null;
     gameState = true;
     if(gameState = true) {
@@ -55,64 +90,39 @@ function newGame() {
         startGame.style.display = "none";
         instructions.style.display = "none";
         document.getElementById("playArea").addEventListener("click", function(e) {
-            // checks to verify the event was clicked
-            console.log("mouseclick on ", e.target); 
-            // TODO increments the playerMoves only if the target clicked was not the bouncingDuck - does not work
-            if ($(e.target).is(".shootThisDuck")) {
-                // player1score = player1score + 1;
-                // playerMoves = playerMoves + 1;
-                console.log("playerMoves = " + playerMoves);
-            };
-
-            playerMoves = playerMoves + 1;
-            console.log("Player 1 moves: " + playerMoves);
-            
-            // TODO when playerMoves === 2 (3 clicks hit or miss) then next player's turn *** Does not change back to pLayer 1 turn
-            if(playerMoves === 4) {
-            console.log("Next player's turn!!!");
-            player2Turn();
-            playerMoves = 0;
-            playerMoves = playerMoves + 1;
-            console.log("Player 2 moves: " + playerMoves);
-            round = round + 1;
-        }
-
-        if(round === 4) {
-            if (player1score === player2score) {
-                console.log("It's a tie!!!")
-            } else if (player1score > player2score) {
-                console.log("Player 1 Wins!!!")
-            } else {
-                console.log("Player 2 Wins!!!")
-            }
-            // TODO change to edit DOM usiong jquery <p> tag to display the results + GAME OVER notification
-            console.log("Game Over");
-
-            // TODO Display the startGame button to start a new game but this does not clear the score
-            startGame.style.display = "block";
-            player1score = 0;
-            player2score = 0;
-            round = 0; // TODO does not reset when game restarted
-            playerMoves = 0;
-            gameState = false;
-            bouncingDuck.style.display = "none";
-        }
+            addRound();
+            checkWinner();
+            console.log("Clicks: " + playerMoves)
         });
-
-    }
-
-    // change the player turn when 3 shots fired, whether hit or miss
-    if(player1Turn === 2) {
-
     }
 }
 
-// function showBouncingDuck() {
-//     document.getElementById("bouncingDuck").style.visibility = "visible";
-// }
+function checkWinner() {
+    if(round >= 4) {
+        if (player1score === player2score) {
+            $("p").text("Game Over - It's a tie!!!");
+        } else if (player1score > player2score) {
+            $("p").text("Game Over - Player 1 Wins!!!");
+        } else {
+            $("p").text("Game Over - Player 1 Wins!!!");
+        }
+        // TODO change to edit DOM usiong jquery <p> tag to display the results + GAME OVER notification
+        document.getElementById("gameTitle").style.display = "block";
+
+        //  Display the startGame button to start a new game 
+        startGame.style.display = "block";
+        player1score = 0;
+        player2score = 0;
+        round = 0; 
+        playerMoves = 0;
+        gameState = false;
+        bouncingDuck.style.display = "none";
+    }
+}
 
 function removeElement() {
     document.getElementById("introDuck").style.display = "none";
+    document.getElementById("gameTitle").style.display = "none";
   }
 
 // window.addEventListener("DOMContentLoaded", event => {
@@ -120,3 +130,4 @@ function removeElement() {
 //     audio.volume = 0.2;
 //     audio.play();
 //   })
+
