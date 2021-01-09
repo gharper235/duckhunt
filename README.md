@@ -16,7 +16,3 @@ User clicks on the ducks as they appear to shoot the duck. If the player hits th
 Duck images obtained from https://www.picgifs.com
 Music and win sound from https://www.freesoundslibrary.com
 Duck quack sound from https://wavlist.com
-
-####Ideas:
-radnom floating image within a container box
-https://codepen.io/scottkellum/pen/BoZvjR
