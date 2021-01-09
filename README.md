@@ -12,6 +12,8 @@ Inspired by classic Nintendo NES game "Duck Hunt". User with the highest score w
 ### User Story: 
 User clicks on the ducks as they appear to shoot the duck. If the player hits the duck, by clicking on the duck, then a point is awarded. If the user misses the duck dissappears and the players turn is over. At the end of three rounds, the player with the highest score wins. If both players have the same score then its a tie.
 
+Tried out a few tricks, resize your browser window to a smaller width and hidth to see what happens. Refresh your browser to start a new game. Got a bug that seems to carry over after newGame() is called a 2nd time on not always clearing the variables.
+
 ### Credits:
 Duck images obtained from https://www.picgifs.com
 Music and win sound from https://www.freesoundslibrary.com

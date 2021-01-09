@@ -71,7 +71,7 @@ function addScore() {
 }
 
 function help() {
-    $("p").text("Shoot the ducks by clicking directly on them to gain a point. The player with the most points at end of 3 rounds wins, if it's not a tie!");
+    $("p").text("Shoot the ducks by clicking directly on it to gain a point. The player with the most points at end of 3 rounds wins, if it's not a tie!");
 }
 
 function newGame() {
