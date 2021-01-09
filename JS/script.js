@@ -3,20 +3,18 @@ var player1score = 0;
 var player2score = 0;
 var round = 0;
 var playerMoves = 0;
+var playerTurn = 0;
 var player1turn = 0; // if this is 0 then player is not active, if 1 then the player is active
 var player2turn = 0; // if this is 0 then player is not active, if 1 then the player is active
 let gameState = false;
 let bouncingDuck = document.getElementById("bouncingDuck");
 
 document.getElementById("bouncingDuck").addEventListener("click", function(e) {
-    // checks to verify the event was clicked
-    // console.log("Duck was hit"); 
-
     // plays success audio when duck is hit
     var audio = new Audio("audio/success.mp3"); 
     audio.play();
-    renderScoreBoard();
     addScore();
+    renderScoreBoard();
 });
 
 function renderScoreBoard() {
@@ -32,45 +30,44 @@ function player1Turn(){
     console.log("Player 2 Turn variable is: " + player2turn);
     $("p").text("Player 1's Turn");
     playerMoves = 0;
+    checkPlayerTurn();
 }
 
 function player2Turn(){
     player1turn = 0;
     player2turn = 1;
+    console.log("Player 1 Turn variable is: " + player1turn);
+    console.log("Player 2 Turn variable is: " + player2turn);
     $("p").text("Player 2's Turn");
-    player2shots = 0;
     playerMoves = 0;
+    checkPlayerTurn();
+
 }
 
-// TODO does not work
-// function checkPlayerTurn() {
-//     if(player1turn = 1 && playerMoves = 3) {
-//         player2Turn();
-//     } 
-//     // if(player2Turn = 1 && playerMoves = 3) {
-//     //     player1Turn();
-//     // }
-// }
+function checkPlayerTurn() {
+    if(player1turn === 0 && player2turn === 0) {
+        player1Turn();
+        playerMoves = playerMoves - 1;
+    } else {
+        if(player1turn === 1 && playerMoves === 3) {
+            player2Turn();
+        } else if(player2turn === 1 && playerMoves === 3) {
+            round = round + 1;
+            renderScoreBoard();
+            player1Turn();
+        }
+    }
+}
 
 function addScore() {
-    if (player1turn = 1) {
+    if (player1turn === 1) {
         player1score = player1score + 1;
     } 
-    else if (player2turn = 1) {
+    else if (player2turn === 1) {
         player2score = player2score + 1;
     }
     console.log("Player 1 score: " + player1score);
     console.log("Player 2 score: " + player2score);
-}
-
-function addRound() {
-    if(playerMoves <= 3) {
-        playerMoves = playerMoves + 1;
-    } else {
-        round = round + 1;
-        playerMoves = 0;
-    }
-    renderScoreBoard();
 }
 
 function help() {
@@ -78,39 +75,43 @@ function help() {
 }
 
 function newGame() {
-    renderScoreBoard();
-    removeElement();
-    // state which players turn it is plus reset scoreboard values
-    player1Turn();
-    winner = null;
     gameState = true;
-    if(gameState = true) {
+    removeElement();
+    round = round + 1;
+    renderScoreBoard();
+    checkPlayerTurn();
+
+
+    if(gameState == true) {
         stats.style.display = "block";
         bouncingDuck.style.display = "block";
         startGame.style.display = "none";
         instructions.style.display = "none";
-        document.getElementById("playArea").addEventListener("click", function(e) {
-            addRound();
+        if(gameState = true) {
+            document.getElementById("playArea").addEventListener("click", function(e) {
+            shoot();
+            checkPlayerTurn();
             checkWinner();
-            console.log("Clicks: " + playerMoves)
+            console.log(playerMoves)
         });
-    }
-}
+    }}
+};
 
 function checkWinner() {
     if(round >= 4) {
-        if (player1score === player2score) {
+        if (player1score == player2score) {
             $("p").text("Game Over - It's a tie!!!");
         } else if (player1score > player2score) {
             $("p").text("Game Over - Player 1 Wins!!!");
         } else {
-            $("p").text("Game Over - Player 1 Wins!!!");
+            $("p").text("Game Over - Player 2 Wins!!!");
         }
-        // TODO change to edit DOM usiong jquery <p> tag to display the results + GAME OVER notification
+        gameState = false;
+
         document.getElementById("gameTitle").style.display = "block";
 
         //  Display the startGame button to start a new game 
-        startGame.style.display = "block";
+        // startGame.style.display = "block";
         player1score = 0;
         player2score = 0;
         round = 0; 
@@ -129,5 +130,7 @@ function removeElement() {
 //     const audio = document.querySelector("audio");
 //     audio.volume = 0.2;
 //     audio.play();
-//   })
 
+function shoot() {
+    playerMoves = playerMoves + 1
+}
