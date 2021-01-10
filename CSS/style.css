@@ -23,6 +23,9 @@ body {
   #crosshairCursor {
     display: none;
   }
+  #displayPlayerTurn {
+    display: none;
+  }
   #audioControl {
     display: none;
   }
@@ -45,6 +48,9 @@ body {
     display: none;
   }
   #gameTitle {
+    display: none;
+  }
+  #displayPlayerTurn {
     display: none;
   }
   #crosshairCursor {
